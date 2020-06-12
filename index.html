@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form  >
+          <input type="text" name="test" id="test" placeholder="Matricula"> 
+        </form>
+        <a href="page2.html"><input type="button" value="enviar" onclick="storage()"/></a>
+        <script>
+            let test = document.querySelector("#test")
+            function storage(){
+                localStorage.setItem("matricula",test.value)
+                console.log(localStorage.getItem("matricula"))
+            }
+            
+         function getIp(callback){
+          
+              function response(s){
+                callback(window.userip);
+
+                s.onload = s.onerror = null;
+                document.body.removeChild(s);
+            }
+            
+            function trigger(){
+                window.userip = false;
+
+                var s = document.createElement("script");
+                s.async = true;
+                s.onload = function() {
+                    response(s);
+                };
+                s.onerror = function() {
+                    response(s);
+                };
+
+                s.src = "https://l2.io/ip.js?var=userip";
+                document.body.appendChild(s);
+            }
+
+            if (/^(interactive|complete)$/i.test(document.readyState)) {
+                trigger();
+            } else {
+                document.addEventListener('DOMContentLoaded', trigger);
+            }
+        }
+
+        getIp(function (ip) {
+            localStorage.setItem("ip",ip)
+        });
+        </script>
+    </body>
+</html>

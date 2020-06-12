@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <h1 id="matricula"></h1>
+        <h2 id="tempo"></h2>
+        <h3 id="ip"></h3>
+        <script>   
+            const contador = {hora:0, minuto:0, segundo:0}
+            document.querySelector("#tempo").innerText = `Seu tempo conectado é: ${contador.hora < 10 ? '0' + contador.hora.toString() : contador.hora}:${contador.minuto < 10 ? '0' + contador.minuto.toString() : contador.minuto}:${contador.segundo < 10 ? '0' + contador.segundo.toString() : contador.segundo}`
+            document.querySelector("#matricula").innerText = "Sua Matricula é: " + localStorage.getItem("matricula")
+            document.querySelector("#ip").innerText = "Seu Ip é: " + localStorage.getItem("ip")
+
+            setInterval(()=>{
+                document.querySelector("#tempo").innerText = `Seu tempo conectado é: ${contador.hora < 10 ? '0' + contador.hora.toString() : contador.hora}:${contador.minuto < 10 ? '0' + contador.minuto.toString() : contador.minuto}:${contador.segundo < 10 ? '0' + contador.segundo.toString() : contador.segundo}`
+                if(contador.segundo == "59"){
+                    contador.segundo = 0;
+                    contador.minuto += 1;
+                    if(contador.minuto == "60"){
+                        contador.minuto = 0;
+                        contador.hora += 1;
+                }
+                }else{
+                    contador.segundo +=1;
+                }
+            },1000)
+        </script>
+    </body>
+</html>
